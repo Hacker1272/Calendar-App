@@ -13,5 +13,8 @@ class EventView(ModelViewSet):
 
 
 class RequestView(ModelViewSet):
-    queryset = Request.objects.all()
+    permission_classes = [IsAuthenticated]
     serializer_class = RequestSerializer
+
+    def get_queryset(self):
+        return Request.objects.filter(user=self.request.user)

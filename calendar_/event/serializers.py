@@ -26,5 +26,14 @@ class EventSerializer(serializers.ModelSerializer):
 
 class RequestSerializer(serializers.ModelSerializer):
     class Meta:
-        fields = "__all__"
+        fields = ['event','status']
         model = Request
+    def save(self):
+        user = self.context['request'].user
+        event = self.validated_data['event']
+        status = self.validated_data['status']
+        Request.objects.create(
+            user=user,
+            event=event,
+            status=status
+        )

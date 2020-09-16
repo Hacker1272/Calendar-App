@@ -7,7 +7,7 @@ from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'event', EventView, basename='event')
-router.register(r'request', RequestView)
+router.register(r'request', RequestView, basename='request')
 
 
 urlpatterns = [
